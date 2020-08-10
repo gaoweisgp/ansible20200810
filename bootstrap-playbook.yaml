@@ -1,0 +1,77 @@
+---
+- name: bootstrapping and new user creation
+  hosts: raiders
+  gather_facts: no
+
+  vars:
+          newuser2: belloq
+          newuser3: willie
+          newuser4: elsa
+          users1:
+                  - larry
+                  - manny
+                  - moe
+                  - jack
+
+  vars_files:
+          - vars/ark.yaml
+
+
+  tasks:
+          - name: update apt with latest repo info
+            raw: "apt upgrade -y"
+            become: yes
+
+
+          - name: top off raiders (indy) with python
+            raw: "apt install -y python3-pip"
+            become: yes
+
+          - name: create new group
+            group:
+                    name: indymovies
+                    state: present
+            become: yes
+
+          - name: Add newuser1 to target hosts
+            user:
+                    name: "{{ newuser1 }}"
+                    state: present
+                    group: indymovies
+            become: yes
+
+          - name: Add newuser2 to target hosts                          
+            user:   
+                    name: "{{ newuser2 }}"
+                    state: present
+                    group: indymovies
+            become: yes
+
+          - name: add newuser3 to target hosts
+            user:
+                    name: "{{ newuser3 }}"
+                    state: present
+                    group: indymovies
+            become: yes
+
+          - name: add newuser4 to target hosts
+            user:
+                    name: "{{ newuser4 }}"
+                    state: present
+                    group: indymovies
+            become: yes
+
+
+          # create new user on target system
+          - name: Add new users to group 'sandbox'
+            user:
+              name: "{{ item }}"
+              comment: throwaway user account for testing
+              state: present
+              shell: /bin/bash       # Defaults to /bin/bash
+              system: no             # Defaults to no
+              createhome: yes        # Defaults to yes
+              group: indymovies
+            become: yes
+            loop: "{{ users1 }}"
+            

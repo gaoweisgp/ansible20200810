@@ -1,0 +1,41 @@
+---
+- name: Playbook that grabs and display the astros on ISS
+  hosts: localhost
+  connection: local
+
+  vars:
+          heroes: "{{ lookup('url', 'http://api.open-notify.org/astros.json') }}"
+
+  tasks:
+          - name: Show the heroes we got back
+            debug:
+                    var: heroes
+                    verbosity: 1
+
+          - name: show just the names of the heroes
+            debug:
+                    var: heroes.people
+                    verbosity: 1
+
+          - name: display some astros
+            debug:
+                    msg: "Currently on the ISS is ---> {{ item.name.split()[-1] }}" 
+            loop: "{{ heroes.people }}"
+
+
+          ## play it again sam!
+          - name: try that agian using the URI module
+            uri:
+                url: http://api.open-notify.org/astros.json
+                method: GET
+            register: larry   # this means save the JSON resturned to the URI module as the var larry
+
+          - name: Fail the playbook
+            fail:
+                    msg: "A non 200 code was returned to our lookup"
+            when: larry.status != "200"
+
+          - name: what the heck is larry
+            debug:
+                    var: item.name.split()[-1]
+            loop: "{{ larry.json.people }}"

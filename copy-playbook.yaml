@@ -1,0 +1,11 @@
+---
+- name: Our first playbook    # helpful metadata
+  hosts: planetexpress        # matches within the inventory
+
+
+  tasks:
+
+          - name: Copy a file into each of our hosts
+            copy:
+                    src: ~/ans/files/fry.txt  # from the local machine (controller)
+                    dest: ~/fry.txt # home directory on all remote hosts
