@@ -1,0 +1,47 @@
+---
+- name: Network Commands by Vendor  
+  hosts: allswitches
+  gather_facts: no
+  connection: network_cli
+
+  vars_files:
+    - ~/switch.creds
+
+  tasks:
+    - name: Run Arista command
+      eos_command:
+        commands: show ip int br
+      when: ansible_network_os == 'eos'
+      register: result 
+
+    - name: show result
+      debug:
+              var: result
+
+    - name: create a variable mid playbook
+      set_fact:
+              aristastdout: "{{ result.stdout }}"
+
+    - name: show new aristastdout var
+      debug:
+              var: aristastdout
+
+    - name: Run Cisco NXOS command
+      nxos_command:
+        commands: show ip int br
+      when: ansible_network_os == 'nxos'
+      register: result
+
+    - name: show result
+      debug:
+              var: result
+
+    - name: Run Vyos command
+      vyos_command:
+        commands: show interface
+      when: ansible_network_os == 'vyos'
+      register: result
+
+    - name: show result
+      debug:
+              var: result

@@ -1,0 +1,6 @@
+[aristaeos]
+ans-3641-sw-01
+ans-3641-sw-02
+
+[aristaeos:vars]
+ansible_network_os=eos 

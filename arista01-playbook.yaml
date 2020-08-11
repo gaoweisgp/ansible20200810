@@ -1,0 +1,28 @@
+---
+- name: Creating a playbook to work with network devices
+  hosts: ~^arista
+  gather_facts: true 
+  connection: network_cli
+
+  vars:
+          #          ansible_network_os: eos    # REQUIRED look to https://github.com/ansible/ansible/blob/devel/docs/docsite/rst/network/user_guide/platform_index.rst
+          ansible_become: yes
+          ansible_become_method: enable
+
+  vars_files:
+          - vars/eosswitches.yaml
+
+          #vars_files:
+          #          ansible_user: admin
+          #          ansible_ssh_pass: alta3
+
+  tasks:
+          - name: just an example of working with Arista EOS switches
+            eos_banner:
+                banner: login
+                text: |
+                  this is my login banner
+                  that contains a multiline
+                  string
+                state: "{{ aborpres }}" ## absent or present
+

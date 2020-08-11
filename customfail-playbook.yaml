@@ -1,0 +1,8 @@
+---
+- name: Playbook that tries to run a module that does not exist
+  hosts: planetexpress
+
+  tasks:
+          - name: made up module that throws an error
+            bloombergih:
+                    who: cares
