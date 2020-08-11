@@ -1,2 +1,17 @@
 ---
 # list of links from class
+
+# developing modules
+https://docs.ansible.com/ansible/latest/dev_guide/developing_modules_general.html
+
+# developing plugins
+https://docs.ansible.com/ansible/2.5/dev_guide/developing_plugins.html
+
+# intro to inventory
+https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html
+
+# special variables
+https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html
+
+# custom nasa module library
+https://github.com/rzfeeser/ansible-custom-modules-nasa-api
