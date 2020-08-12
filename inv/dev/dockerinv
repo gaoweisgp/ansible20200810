@@ -1,0 +1,2 @@
+[dockercontainers]
+zontainer ansible_connection=docker

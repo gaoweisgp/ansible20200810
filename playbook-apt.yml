@@ -1,6 +1,6 @@
 ---
 - name: Playbook - Install figlet
-  hosts: labhosts
+  hosts: web
   gather_facts: yes   # default is yes
 
   tasks:
@@ -9,4 +9,5 @@
         name: figlet
         state: present
     become: yes
+    no_log: true
 

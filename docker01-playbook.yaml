@@ -1,0 +1,31 @@
+---
+- name: Creating a set of containers
+  hosts: localhost
+  connection: local
+  #become: yes
+
+  tasks:
+  - name: Create a data container
+    docker_container:
+      name: zontainer
+      image: alpine:latest
+      state: started
+      env:
+        FOO: bar
+      command: sleep 600
+
+
+# Start of the Second Play
+- name: Connect to container
+  hosts: dockercontainers
+  connection: docker
+  gather_facts: false
+
+  tasks:
+  - name: Interact with the container
+    raw: "echo $FOO"
+    register: result
+
+  - name: display result
+    debug:
+      var: result

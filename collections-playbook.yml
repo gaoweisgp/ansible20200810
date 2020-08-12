@@ -1,0 +1,12 @@
+---
+- name: Example of using a collection
+  hosts: localhost
+
+  collections:
+          - juniper
+
+
+  tasks:
+          - name: simple play
+            debug:
+                    msg: "works"

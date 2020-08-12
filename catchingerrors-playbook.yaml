@@ -1,0 +1,86 @@
+---
+- name: A playbook for demonstrating error handling techniques
+  hosts: planetexpress
+  gather_facts: yes
+
+  vars:
+          apps_to_install: [apache2, vsftpd]
+
+  tasks:
+          - name: PRECHECK PHASE
+            block:
+                    - name: Ensure platforms we logged into are all Debian
+                      fail:
+                              msg: "Ansible has detected this host is not supported"
+                      when: ansible_os_family != "Debian"
+
+            rescue:
+                    - name: PRECHECK PHASE - FAILED
+                      fail:
+                              msg: "PRECHECK PHASE - FAILED! Nothing to rollback. Exiting..."
+
+
+          - name: MAINTENANCE PHASE
+            block:
+                    - name: Install services to our remate hosts
+                      apt:
+                              state: present
+                              name: "{{ apps_to_install }}"
+                      become: yes
+
+                    - name: Turn up the service
+                      service:
+                              state: started
+                              name: "{{ item }}"
+                      loop: "{{ apps_to_install }}"
+                      become: yes
+                      # with_item   <--- old way to do a loop
+
+            rescue:
+                    - name: MAINTENANCE PHASE - FAILED - Rollback services on remote hosts
+                      apt:
+                              state: absent
+                              name: "{{ apps_to_install }}"
+                      become: yes
+
+                    - name: MAINTENANCE PHASE FAILED - ROLL BACK COMPLETE... EXITING
+                      fail:
+                              msg: "FAILED! Rollback complete. Exiting..."
+
+          - name: POSTCHECK PHASE
+            block:
+                    - name: populate service facts
+                      service_facts:
+
+                    - name: show the services running
+                      debug:
+                              var: ansible_facts.services # this was auto created by service_facts
+
+                    - name: ensure our new services are installed
+                      fail:
+                              msg: "Ansible has detected not all services have installed properly"
+                      when: ansible_facts.services.get(item).state != "running"
+                      loop: "{{ apps_to_install }}"
+
+            rescue:
+                    - name: POSTCHECK - FAILED - Rollback services on remote hosts
+                      apt:
+                              state: absent
+                              name: "{{ apps_to_install }}"
+                      become: yes
+
+                    - name: POSTCHECK PHASE FAILED - ROLL BACK COMPLETE... EXITING
+                      fail:
+                              msg: "FAILED! Rollback complete. Exiting..."
+
+        ## in a real deployment you might consider an ALWAYS section to provide the results
+        ## of how the playbook ran
+        # always:
+        #      - name: EXAMPLE - Email your team the results of the playbook
+        #        mail:   # mail module is used to send SMTP (email)
+        #           host:
+        #           port:
+        #           password:
+        #           username:
+        #           subject:
+        #           body: send an email with results via the mail module  
