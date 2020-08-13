@@ -1,0 +1,34 @@
+{
+ "collection_info": {
+  "namespace": "rzfeeser",
+  "name": "nasaapi",
+  "version": "1.0.0",
+  "authors": [
+   "Russell Zachary Feeser <rzfeeser@users.noreply.github.com>"
+  ],
+  "readme": "README.md",
+  "tags": [
+   "nasaapi",
+   "nasa",
+   "training"
+  ],
+  "description": "your collection description",
+  "license": [
+   "GPL-2.0-or-later"
+  ],
+  "license_file": null,
+  "dependencies": {},
+  "repository": "https://github.com/rzfeeser/ansible-custom-modules-nasa-api",
+  "documentation": "https://github.com/rzfeeser/ansible-custom-modules-nasa-api",
+  "homepage": "https://github.com/rzfeeser/ansible-custom-modules-nasa-api",
+  "issues": "https://github.com/rzfeeser/ansible-custom-modules-nasa-api"
+ },
+ "file_manifest_file": {
+  "name": "FILES.json",
+  "ftype": "file",
+  "chksum_type": "sha256",
+  "chksum_sha256": "455109ca9cfb65954fad36dd10066fa35d5c9bff6b056542f4f127b49a431fac",
+  "format": 1
+ },
+ "format": 1
+}

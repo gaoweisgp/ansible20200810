@@ -1,0 +1,82 @@
+{
+ "files": [
+  {
+   "name": ".",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "README.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "36d8a964b5a29e042c6b01a4fe6d77dd47b876d08a37cbacc66e5d837c6c68a5",
+   "format": 1
+  },
+  {
+   "name": "plugins",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/README.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c82ee692702ec1dd604cdbc38ff252114e5204e1b0627045a66c9451e7a918ac",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/nasa_eonet_events.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "2dca7e39e2847205953c19d323ac8e747b7972ed346d660307f4b5cedc87ba2f",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/nasa_earth.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c8fec1cef3cb36efff53ffb002604348105853f9cf83d97179052c200d19b999",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/nasa_neow.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e60d31ca1a8337cb5ad0fdb71ef24fd9ef1c3b622e1abbbb63b9f66caa648f40",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/nasa_apod.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5d6d892187589b95860b8de24c02a851fbe4b598aa5bb178a3c33c46943b19da",
+   "format": 1
+  },
+  {
+   "name": "roles",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "docs",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  }
+ ],
+ "format": 1
+}

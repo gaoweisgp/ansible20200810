@@ -1,0 +1,45 @@
+---
+- name: Example of making ansible connect to AWS
+  hosts: localhost
+  connection: local
+  gather_facts: false  # collects facts about the local system
+
+  vars_files:
+          - ~/cred.zon
+
+  tasks:
+          - name: see information about s3 buckets
+            aws_s3_bucket_info:
+                    aws_access_key: "{{ ec2_access_key }}"
+                    aws_secret_key: "{{ ec2_secret_key }}"
+            register: result
+
+          - name: List results of buckets
+            debug:
+               msg: "{{ result.buckets }}"
+
+          - name: determine how many buckets
+            debug:
+               msg: "{{ result.buckets | length }}"
+
+          - name: attempt to generate a unique name
+            set_fact:
+                    unique_name: "{{ lookup('password', '/dev/null length=13 chars=ascii_letters') }}"
+
+          - name: see if our unique name printed out correctly
+            debug:
+                    var: unique_name
+
+          - name: create a bucket if less than 2 exist
+            s3_bucket:
+                    name: "{{ unique_name.lower() }}"
+                    state: present
+                    aws_access_key: "{{ ec2_access_key }}"
+                    aws_secret_key: "{{ ec2_secret_key }}"
+            when: result.buckets | length < 2
+
+               #          - name: ensure that 3 buckets always exist
+               #            s3_bucket:
+               #                name: mys3bucket
+               #                state: present
+                #            when: result.bucket | length < 3

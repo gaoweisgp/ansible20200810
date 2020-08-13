@@ -1,0 +1,16 @@
+---
+- name: Using a Collection
+  hosts: localhost
+
+  collections:
+          - example.fake
+          - rzfeeser.nasaapi
+
+  tasks:
+          # Obtain APOD from January 01, 2019 in low res.
+          - name: Lookup the NASA APOD API for 2019-01-01 in std def
+            nasa_apod:
+              apikey: DEMO_KEY
+              date: "2019-01-01"  # Date should be surrounded in quotes
+              hd: false
+              dest: /home/student/apod.png    # save file as apod.png

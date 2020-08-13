@@ -1,0 +1,22 @@
+---
+- name: Create an s3 bucket on AWS with Ansible
+  hosts: localhost
+  connection: local
+
+  vars_files:
+          - ~/cred.zon
+  tasks:
+          - name: ducktoaster77 for all your object storing needs
+            s3_bucket:
+              name: ducktoaster77    # naming rules https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules
+              state: present
+              aws_access_key: "{{ ec2_access_key }}"
+              aws_secret_key: "{{ ec2_secret_key }}"
+
+              #          - name: does ducktoaster77 have any friends?
+              #            aws_s3_bucket_info:
+              #            register: result
+
+              #          - name: show the results
+              #            debug:
+              #              var: result
